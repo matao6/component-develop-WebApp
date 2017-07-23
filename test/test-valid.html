@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
+    <title>component-develop-webapp</title>
+    <!-- <link rel="stylesheet" type="text/css" href="../css/lib/jquery.fullPage.css"> -->
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .component {
+            width: 50%;
+            height: 50px;
+            margin-bottom: 20px;
+            background-color: #eee;
+            display: none;
+        }
+        /* #callbacks-placeholder{
+            position: fixed;
+            left: 0;
+            top: 0;
+            /* color: black; */
+            z-index: 999;
+        } */
+    </style>
+
+    <!-- <script src="../js/lib/jquery.js"></script> -->
+    <script type="text/javascript" src="../js/lib/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery.fullPage.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // var placeHolder = $('#callbacks-placeholder');
+            // var deleteLog = false;
+
+            $('#h5').fullpage({
+                sectionsColor: ['#ccc', '#4BBFC3', '#7BAABE'],
+                onLeave: function (index, nextIndex, direction) {
+                    // if (deleteLog) {
+                    //     placeHolder.html('')
+                    // }
+
+                    $('#h5').find('.page').eq(index-1).trigger('onLeave');
+                },
+                afterLoad: function (anchorLink, index) {
+                    // placeHolder.append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+                    // deleteLog = true;
+                    $('#h5').find('.page').eq(index-1).trigger('onLoad');             
+                }
+            })
+
+            $('.page').on('onLeave', function () {
+                console.log( $(this).attr('id'), '===>', 'onLeave')
+                $(this).find('.component').trigger('onLeave');
+            })
+
+            $('.page').on('onLoad', function () {
+                console.log( $(this).attr('id'), '===>', 'onLoad')
+                $(this).find('.component').trigger('onLoad');                
+            })
+            
+            $('.component').on('onLeave', function () {
+                $(this).fadeOut();
+                return false;
+            })
+
+            $('.component').on('onLoad', function () {
+                $(this).fadeIn();
+                return false;
+            })
+        });
+    </script>
+</head>
+<body>
+    <!-- <div id="callbacks-placeholder"></div> -->
+    <!-- 用于验证fullpage.js切换页面，以及内容组织结构可用，组件能够进行动画 -->
+    <div id="h5">
+        <div id="page-1" class="page section">
+            <div class="component logo">logo</div>
+            <!-- <div class="component slogn">slogn</div> -->
+        </div>
+        <div id="page-2" class="page section">
+            <div class="component desc">描述信息</div>
+        </div>
+        <div id="page-3" class="page section">
+            <div class="component bar">图表</div>
+        </div>
+    </div>
+</body>
+</html>
