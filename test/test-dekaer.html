@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        li {
+            list-style: none;
+            display: inline-block;
+            border: 1px solid black;
+            padding: 7px 14px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .active {
+            background: rgb(240, 20, 10);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>队列：
+        <li class="size"> 1 </li>
+        <li class="size"> 2 </li>
+        <li class="size"> 3 </li>
+    </ul>
+    <ul>队列：
+        <li class="num"> 4 </li>
+        <li class="num"> 5 </li>
+        <li class="num"> 6 </li>
+    </ul>
+    <ul>队列：
+        <li class="color"> 7 </li>
+        <li class="color"> 8 </li>
+        <li class="color"> 9 </li>
+    </ul>
+    <div class="content">
+
+    </div>
+
+    <script src="../js/lib/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript">
+        $('.size').click(showText);
+        $('.num').click(showText);
+
+        function showText() {
+            var tag = $(this).attr('class').split(' ')[0];
+            // 第一次点击执行
+            if ($(this).attr(tag + 'Tag') === undefined) {
+                switch (tag) {
+                    case 'size':
+                        firstLine($(this).text(), $(this).index(), true);
+                        break;
+                    case 'num':
+                        secondLine($(this).text(), $(this).index(), true);
+                        break;
+                }
+                
+                $(this).addClass('active');
+                $(this).attr(tag + 'Tag', true);
+
+                return;
+            }
+            // 第二 --> N 点击执行
+            if ($(this).attr(tag + 'Tag') == 'true') {
+                $(this).removeClass('active');
+                $(this).attr(tag + 'Tag', false);
+
+                switch (tag) {
+                    case 'size':
+                        firstLine($(this).text(), $(this).index(), false);
+                        break;
+                    case 'num':
+                        secondLine($(this).text(), $(this).index(), false);
+                        break;
+                }
+            } else {
+                $(this).addClass('active');
+                $(this).attr(tag + 'Tag', true);
+
+                switch (tag) {
+                    case 'size':
+                        firstLine($(this).text(), $(this).index(), true, true);
+                        break;
+                    case 'num':
+                        secondLine($(this).text(), $(this).index(), true, true);
+                        break;
+                }
+            }
+        }
+
+        function secondLine (text, index, bool, diffCol) {
+            if (bool) {
+                var wrapper = $('<span class="secondLine_' + index + '" >');
+                wrapper.text(text);
+                // console.log(wrapper);
+                $('.firstLine_'+index).append(wrapper);
+                // var comSec = $('.firstLine_'+index).clone().append(wrapper);
+                // console.log($('.firstLine_'+index).clone().append(wrapper));
+                // $('.content').html($('.content').html() + $('.firstLine_'+index).clone().append(wrapper));
+            } else {
+                $('.secondLine_' + index).remove();
+            }
+            // if (diffCol) {
+            //     var diff = $('.firstLine_'+index).clone();
+            //     $('.secondLine_'+index).text(text);
+            //     $('.comtent').append(diff);
+            // }
+        }
+
+        function firstLine(text, index, bool) {
+            if (bool) {
+                var wrapper = $('<div class="firstLine_' + index + '" >');
+                wrapper.text(text);
+                $('.content').append(wrapper);
+            } else {
+                $('.firstLine_' + index).remove();
+            }
+
+        }
+    </script>
+</body>
+
+</html>

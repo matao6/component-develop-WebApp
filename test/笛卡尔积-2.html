@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        li {
+            list-style: none;
+            display: inline-block;
+            border: 1px solid black;
+            padding: 7px 14px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .active {
+            background: rgb(240, 20, 10);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>队列：
+        <li class="size"> 1 </li>
+        <li class="size"> 2 </li>
+        <li class="size"> 3 </li>
+    </ul>
+    <ul>队列：
+        <li class="num"> 4 </li>
+        <li class="num"> 5 </li>
+        <li class="num"> 6 </li>
+    </ul>
+    <ul>队列：
+        <li class="color"> 7 </li>
+        <li class="color"> 8 </li>
+        <li class="color"> 9 </li>
+    </ul>
+    <div class="content">
+
+    </div>
+
+    <script src="../js/lib/jquery-3.0.0.min.js"></script>
+    <script>
+        $('.size').click(showText);
+        $('.num').click(showText);
+        $('.color').click(showText);
+
+        function showText() {
+            $(this).toggleClass('active');
+            var tag = $(this).attr('class').split(' ')[0]; // 获取当前点击是那一行
+            // console.log(tag)
+
+            if ($('.size.active').length > 0) {
+                $('.content').empty(); // 清空数据, 达到每次刷新
+
+                var size, sizeStr, sizeIndex,
+                    num, numStr, numIndex,
+                    color, colorStr, colorIndex;
+                // console.log($('.size.active')[0]);
+                // console.log(nowTag)
+                // for (var i = 0, sizeLen = $('.size.active').length; i < sizeLen; i++) {
+                // var sizeTag = $('.size.active')[i];
+
+                $('.size.active').each(function () {
+                    sizeIndex = $(this).index();
+                    size = $(this);
+
+                    if (!$('.num.active') && !$('.color.active')) {
+                        sizeStr = $('<div class="size_' + size.index() + '" >' + size.text() +
+                                    '</div>');
+                        $('.content').append(sizeStr);
+                    }
+                    
+                    // sizeStr = $('<div class="size_' + size.index() + '" >' + size.text() +
+                    //                 '<span class="num_' + num.index() + '" >' + num.text() +
+                    //                     '<span class="color_' + color.index() + '" >' + color.text() +
+                    //                         '</span></span></div>');
+                    // $('.content').append(sizeStr);
+                    // console.log(size)
+
+                    $('.num.active').each(function () {
+                        numIndex = $(this).index();
+                        num = $(this);
+
+                        if ($('.color.active')[0] === undefined) {
+                            numStr = $('<div class="size_' + size.index() + '" >' + size.text() +
+                                    '<span class="num_' + num.index() + '" >' + num.text() +
+                                        '</span></div>');
+                            $('.content').append(numStr);
+                        }
+                        
+                        
+                        // numStr = $('<span class="num_' + num.index() + '" >' + num.text() +
+                        //     '</span>');
+                        // var upSize = $('.size_' + sizeIndex);
+                        // upSize.append(numStr);
+                        // console.log(sizeIndex)
+
+                        $('.color.active').each(function () {
+                            var upNum = $('.num_' + sizeIndex);
+                            color = $(this);
+
+                            // colorStr = $('<span class="color_' + color.index() + '" >' + color.text() +
+                            //     '</span>');
+                            // upNum.append(colorStr);
+                            
+                            colorStr = $('<div class="size_' + size.index() + '" >' + size.text() +
+                                    '<span class="num_' + num.index() + '" >' + num.text() +
+                                        '<span class="color_' + color.index() + '" >' + color.text() +
+                                            '</span></span></div>');
+                            $('.content').append(colorStr);
+                        })
+
+                    })
+                })
+
+                // console.log(sizeTag)
+                // sizeStr = $('<div class="' + nowTag[i].prop('class') + '_' + nowTag[i].index() + '" >' + nowTag[i].text() +
+                //     '</div>');
+
+                // sizeStr = $('<div class="' + sizeTag.index() + '" >');
+
+                // for (var n=0, numLen=$('.num.active').length; n<numLen; n++) {
+                //     numStr = $('<span class="'+$(this).prop('class')+'_'+$(this).index()+'" >');
+                // }
+                // }
+            } else {
+                $('.content').empty();
+            }
+
+        }
+    </script>
+</body>
+
+</html>
