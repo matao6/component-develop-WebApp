@@ -68,7 +68,7 @@
                     sizeIndex = $(this).index();
                     size = $(this);
 
-                    if (!$('.num.active') && !$('.color.active')) {
+                    if ($('.num.active')[0] === undefined) {
                         sizeStr = $('<div class="size_' + size.index() + '" >' + size.text() +
                                     '</div>');
                         $('.content').append(sizeStr);
