@@ -26,42 +26,42 @@
     <script type="text/javascript" src="../js/lib/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="../js/test-H5ComponentBase.js"></script>  
 
-    <!-- 引入柱状图资源 -->
-    <script type="text/javascript" src="../js/H5ComponentPolyLine.js"></script>  
-    <link rel="stylesheet" type="text/css" href="../css/H5ComponentPolyLine.css">
+    <!-- 引入饼图资源 -->
+    <script type="text/javascript" src="../js/H5ComponentPie.js"></script>  
+    <link rel="stylesheet" type="text/css" href="../css/H5ComponentPie.css">
 </head>
 <body>
-    <!-- 用于开发 H5ComponentBar 对象 (柱图组件) -->
+    <!-- 用于开发 H5ComponentBar 对象 (饼图组件) -->
     <div class="iphone"></div>
 
     <script type="text/javascript">
         var cfg = {
-            type: 'polyline',
-            width: 530,
+            type: 'pie',
+            width: 400,
             height: 400,
             data: [
-                ['Js', .2, '#ff7676'],
-                ['Vue', .6],
-                ['CSS3', .4483453],
-                ['HTML5', .7],
-                ['jQuery', .6]
+                ['Js', .4, '#ff7676'],
+                ['Vue', .3],
+                ['CSS3', .05],
+                ['HTML5', .2],
+                ['jQuery', .05]
             ],
             css: {
                 top: 100,
-                opacity: 1
+                // opacity: 0
             },
-            animateIn: {
-                top: 200,
-                opacity: 1
-            },
-            animateOut: {
-                top: 100,
-                opacity: 0
-            },
+            // animateIn: {
+            //     top: 200,
+            //     opacity: 1
+            // },
+            // animateOut: {
+            //     top: 100,
+            //     opacity: 0
+            // },
             center: true
         }
 
-        var h5 = new H5ComponentPolyline('myBarComponent', cfg);
+        var h5 = new H5ComponentPie('myBarComponent', cfg);
         $('.iphone').append(h5);
         // $('.h5_component').trigger('onLoad');
         var leave = false;

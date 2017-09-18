@@ -26,9 +26,9 @@
     <script type="text/javascript" src="../js/lib/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="../js/test-H5ComponentBase.js"></script>  
 
-    <!-- 引入柱状图资源 -->
-    <script type="text/javascript" src="../js/H5ComponentPolyLine.js"></script>  
-    <link rel="stylesheet" type="text/css" href="../css/H5ComponentPolyLine.css">
+    <!-- 引入雷达图资源 -->
+    <script type="text/javascript" src="../js/H5ComponentRadar.js"></script>  
+    <link rel="stylesheet" type="text/css" href="../css/H5ComponentRadar.css">
 </head>
 <body>
     <!-- 用于开发 H5ComponentBar 对象 (柱图组件) -->
@@ -36,8 +36,8 @@
 
     <script type="text/javascript">
         var cfg = {
-            type: 'polyline',
-            width: 530,
+            type: 'radar',
+            width: 400,
             height: 400,
             data: [
                 ['Js', .2, '#ff7676'],
@@ -48,7 +48,7 @@
             ],
             css: {
                 top: 100,
-                opacity: 1
+                opacity: 0
             },
             animateIn: {
                 top: 200,

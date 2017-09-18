@@ -1,8 +1,8 @@
- /* 折线图组件样式 */
-.h5_component_polyline{
+ /* 饼图组件样式 */
+ .h5_component_pie{
     
 }
-.h5_component_polyline canvas{
+.h5_component_pie canvas{
     position: absolute;
     left: 0;
      top: 0;  /*用canvas做动画，会进行分层，要用到   z-index */
@@ -10,17 +10,15 @@
      height: 100%;
      /* background-color: #ccc; */
 }
-.h5_component_polyline .text{
+.h5_component_pie .text{
     position: absolute;
     font-size: 12px;
-    text-align: center;
     /* transform: scale(.8); */
-    transition: all 1s 1.5s;
-    opacity: 0;
+    transition: all 1s;
 }
-.h5_component_polyline_load .text{
-    opacity: 1;
+.h5_component_pie_load .text{
+    /* opacity: 1; */
 }
-.h5_component_polyline_leave .text{
+.h5_component_pie_leave .text{
     opacity: 0;
 }
